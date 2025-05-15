@@ -70,39 +70,28 @@
   </div>
 
   <script>
-    // Read URL parameters
-    const params = new URLSearchParams(window.location.search);
+    document.addEventListener("DOMContentLoaded", function() {
+      const params = new URLSearchParams(window.location.search);
 
-    // Get values or default to N/A or 0
-    const travels = params.get('travels') || 'N/A';
-    const seats = params.get('seats') || 'N/A';
-    const name = params.get('name') || 'N/A';
-    const age = params.get('age') || 'N/A';
-    const gender = params.get('gender') || 'N/A';
-    const price = params.get('price') || '0';
-    const total = params.get('total') || '0';
+      const travels = params.get('travels') || 'N/A';
+      const seats = params.get('seats') || 'N/A';
+      const name = params.get('name') || 'N/A';
+      const age = params.get('age') || 'N/A';
+      const gender = params.get('gender') || 'N/A';
+      const price = params.get('price') || '0';
+      const total = params.get('total') || '0';
 
-    // Display values on page
-    document.getElementById('travels').textContent = decodeURIComponent(travels);
-    document.getElementById('seats').textContent = decodeURIComponent(seats);
-    document.getElementById('name').textContent = decodeURIComponent(name);
-    document.getElementById('age').textContent = age;
-    document.getElementById('gender').textContent = decodeURIComponent(gender);
-    document.getElementById('price').textContent = price;
-    document.getElementById('total').textContent = total;
+      document.getElementById('travels').textContent = travels;
+      document.getElementById('seats').textContent = seats;
+      document.getElementById('name').textContent = name;
+      document.getElementById('age').textContent = age;
+      document.getElementById('gender').textContent = gender;
+      document.getElementById('price').textContent = price;
+      document.getElementById('total').textContent = total;
+    });
 
-    // Download booking details as text file
     function downloadBooking() {
-      const details = `
-Booking Details:
-Travels: ${decodeURIComponent(travels)}
-Seats Selected: ${decodeURIComponent(seats)}
-Passenger Name: ${decodeURIComponent(name)}
-Age: ${age}
-Gender: ${decodeURIComponent(gender)}
-Price per Seat: ₹${price}
-Total Price: ₹${total}
-      `.trim();
+      const details = `Booking Details:\nTravels: ${document.getElementById('travels').textContent}\nSeats Selected: ${document.getElementById('seats').textContent}\nPassenger Name: ${document.getElementById('name').textContent}\nAge: ${document.getElementById('age').textContent}\nGender: ${document.getElementById('gender').textContent}\nPrice per Seat: ₹${document.getElementById('price').textContent}\nTotal Price: ₹${document.getElementById('total').textContent}`;
 
       const blob = new Blob([details], { type: 'text/plain' });
       const url = URL.createObjectURL(blob);
