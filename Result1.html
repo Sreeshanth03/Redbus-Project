@@ -71,27 +71,17 @@
 
   <script>
     document.addEventListener("DOMContentLoaded", function() {
-      const params = new URLSearchParams(window.location.search);
-
-      const travels = params.get('travels') || 'N/A';
-      const seats = params.get('seats') || 'N/A';
-      const name = params.get('name') || 'N/A';
-      const age = params.get('age') || 'N/A';
-      const gender = params.get('gender') || 'N/A';
-      const price = params.get('price') || '0';
-      const total = params.get('total') || '0';
-
-      document.getElementById('travels').textContent = travels;
-      document.getElementById('seats').textContent = seats;
-      document.getElementById('name').textContent = name;
-      document.getElementById('age').textContent = age;
-      document.getElementById('gender').textContent = gender;
-      document.getElementById('price').textContent = price;
-      document.getElementById('total').textContent = total;
+      document.getElementById('travels').textContent = localStorage.getItem('travels') || 'N/A';
+      document.getElementById('seats').textContent = localStorage.getItem('seats') || 'N/A';
+      document.getElementById('name').textContent = localStorage.getItem('name') || 'N/A';
+      document.getElementById('age').textContent = localStorage.getItem('age') || 'N/A';
+      document.getElementById('gender').textContent = localStorage.getItem('gender') || 'N/A';
+      document.getElementById('price').textContent = localStorage.getItem('price') || '0';
+      document.getElementById('total').textContent = localStorage.getItem('total') || '0';
     });
 
     function downloadBooking() {
-      const details = `Booking Details:\nTravels: ${document.getElementById('travels').textContent}\nSeats Selected: ${document.getElementById('seats').textContent}\nPassenger Name: ${document.getElementById('name').textContent}\nAge: ${document.getElementById('age').textContent}\nGender: ${document.getElementById('gender').textContent}\nPrice per Seat: ₹${document.getElementById('price').textContent}\nTotal Price: ₹${document.getElementById('total').textContent}`;
+      const details = `Booking Details:\nTravels: ${localStorage.getItem('travels')}\nSeats Selected: ${localStorage.getItem('seats')}\nPassenger Name: ${localStorage.getItem('name')}\nAge: ${localStorage.getItem('age')}\nGender: ${localStorage.getItem('gender')}\nPrice per Seat: ₹${localStorage.getItem('price')}\nTotal Price: ₹${localStorage.getItem('total')}`;
 
       const blob = new Blob([details], { type: 'text/plain' });
       const url = URL.createObjectURL(blob);
