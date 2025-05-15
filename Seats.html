@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bus Seat Selection</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            background-color: #f4f6f8;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .seat-selection-container {
+            background-color: #fff;
+            border-radius: 12px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+            padding: 25px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .deck {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .seat-grid {
+            display: flex;
+            gap: 12px;
+        }
+
+        .seat {
+            width: 45px;
+            height: 45px;
+            border: 2px solid #d0d0d0;
+            background-color: #fff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 0.9em;
+            cursor: pointer;
+            border-radius: 8px;
+            transition: background-color 0.3s, transform 0.2s;
+        }
+
+        .seat:hover { transform: scale(1.05); }
+        .available { background-color: #e6ffe6; }
+        .sold { background-color: #ffe6e6; cursor: not-allowed; }
+        .selected { background-color: #007bff; color: white; }
+
+        .driver {
+            font-weight: bold;
+            background-color: #333;
+            color: #fff;
+            padding: 5px 10px;
+            border-radius: 4px;
+        }
+
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 12px 24px;
+            font-size: 16px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        button:hover { background-color: #45a049; }
+    </style>
+</head>
+<body>
+    <div class="seat-selection-container">
+        <div class="deck">
+            <span class="deck-label">Lower Deck</span>
+            <div class="seat-grid">
+                <div class="driver">Driver</div>
+                <div class="seat available" data-seat-number="L1" data-price="800">L1</div>
+                <div class="seat available" data-seat-number="L2" data-price="800">L2</div>
+                <div class="seat sold">Sold</div>
+                <div class="seat available" data-seat-number="L3" data-price="850">L3</div>
+                <div class="seat available" data-seat-number="L4" data-price="850">L4</div>
+            </div>
+        </div>
+
+        <div class="deck">
+            <span class="deck-label">Upper Deck</span>
+            <div class="seat-grid">
+                <div class="seat available" data-seat-number="U1" data-price="1200">U1</div>
+                <div class="seat available" data-seat-number="U2" data-price="1200">U2</div>
+                <div class="seat sold">Sold</div>
+                <div class="seat available" data-seat-number="U3" data-price="1250">U3</div>
+                <div class="seat available" data-seat-number="U4" data-price="1250">U4</div>
+            </div>
+        </div>
+
+        <div id="selected-seats-display">Selected Seats: None</div>
+        <div id="total-price-display">Total Price: ₹0</div>
+        <button onclick="proceedToPay()">Proceed to Pay</button>
+    </div>
+
+    <script>
+        const seats = document.querySelectorAll('.seat.available');
+        const selectedSeatsDisplay = document.getElementById('selected-seats-display');
+        const totalPriceDisplay = document.getElementById('total-price-display');
+        const selectedSeats = [];
+        let totalPrice = 0;
+
+        seats.forEach(seat => {
+            seat.addEventListener('click', function() {
+                const seatNumber = this.getAttribute('data-seat-number');
+                const seatPrice = parseInt(this.getAttribute('data-price'));
+
+                if (this.classList.contains('selected')) {
+                    this.classList.remove('selected');
+                    selectedSeats.splice(selectedSeats.indexOf(seatNumber), 1);
+                    totalPrice -= seatPrice;
+                } else {
+                    this.classList.add('selected');
+                    selectedSeats.push(seatNumber);
+                    totalPrice += seatPrice;
+                }
+                updateDisplay();
+            });
+        });
+
+        function updateDisplay() {
+            selectedSeatsDisplay.textContent = `Selected Seats: ${selectedSeats.join(', ') || 'None'}`;
+            totalPriceDisplay.textContent = `Total Price: ₹${totalPrice}`;
+        }
+
+        function proceedToPay() {
+            if (selectedSeats.length === 0) {
+                alert("Please select at least one seat to proceed.");
+                return;
+            }
+
+            const url = `./Conform.html?seats=${encodeURIComponent(selectedSeats.join(','))}&price=${totalPrice}`;
+            window.location.href = url;
+        }
+    </script>
+</body>
+</html>

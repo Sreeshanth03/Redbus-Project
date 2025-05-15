@@ -1,0 +1,149 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>RedBus Login</title>
+  <link rel="icon" type="image/png" href="./rdc-redbus-logo.webp" />
+  <style>
+    /* Same styling as before */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    body {
+      background: #f9f9f9;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      padding: 1rem;
+    }
+
+    .login-container {
+      background-color: #fff;
+      padding: 2rem 3rem;
+      border-radius: 20px;
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+      width: 100%;
+      max-width: 400px;
+      text-align: center;
+    }
+
+    .logo img {
+      width: 60px;
+      height: 60px;
+      object-fit: contain;
+    }
+
+    h1 {
+      color: #b50b0b;
+      margin-bottom: 1.5rem;
+    }
+
+    input, button {
+      width: 100%;
+      padding: 0.8rem;
+      margin-bottom: 1rem;
+      border-radius: 8px;
+      font-size: 1rem;
+    }
+
+    input {
+      border: 1px solid #ccc;
+    }
+
+    button {
+      background-color: #b50b0b;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #8f0909;
+    }
+
+    #guestBtn {
+      margin-top: 0.5rem;
+      background-color: rgb(184, 17, 17);
+    }
+
+    a {
+      display: block;
+      margin-top: 1rem;
+      color: #b50b0b;
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="login-container">
+    <div class="logo">
+      <img src="./rdc-redbus-book.svg" alt="Book Icon" />
+    </div>
+    <h1>Login to RedBus</h1>
+    <input type="text" placeholder="E-Mail" id="inp3" />
+    <input type="password" placeholder="Password" id="inp4" />
+    <button id="btn2">Login</button>
+    <a href="./signup.html">New user? Register here</a>
+    <button id="guestBtn">Continue as Guest</button>
+  </div>
+
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.0/firebase-app.js";
+    import { getAuth, createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/11.6.0/firebase-auth.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyCawqqFZcav_seVrKZDF7g6gwE4vLTxZj0",
+      authDomain: "redbus-6e2ea.firebaseapp.com",
+      projectId: "redbus-6e2ea",
+      storageBucket: "redbus-6e2ea.appspot.com",
+      messagingSenderId: "476419522052",
+      appId: "1:476419522052:web:b9de3ab771f23e0452bf51"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth();
+
+    document.getElementById("guestBtn").addEventListener("click", function () {
+      window.location.href = "./select.html";
+    });
+
+    document.getElementById("btn2").addEventListener("click", () => {
+      const email = document.getElementById("inp3").value;
+      const password = document.getElementById("inp4").value;
+
+      if (!email || !password) {
+        alert("Please fill in all fields.");
+        return;
+      }
+
+      createUserWithEmailAndPassword(auth, email, password)
+        .then((userCredential) => {
+          const user = userCredential.user;
+          console.log("User Login:", user);
+          alert("Login Successful!");
+
+          // ✅ Save the email to localStorage
+          localStorage.setItem("userEmail", email);
+
+          window.location.href = "./select.html";
+        })
+        .catch((error) => {
+          console.error("Login Error:", error.code, error.message);
+          alert(`Login Failed: ${error.message}`);
+        });
+    });
+  </script>
+</body>
+</html>

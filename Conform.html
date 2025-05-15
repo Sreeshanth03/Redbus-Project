@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Confirm Your Booking</title>
+  <style>
+    /* your existing styles here */
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      background-color: #f4f6f8;
+    }
+    .confirm-container {
+      background-color: #fff;
+      padding: 25px 30px;
+      border-radius: 10px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+      max-width: 450px;
+      width: 100%;
+    }
+    h1 {
+      text-align: center;
+      margin-bottom: 15px;
+      font-size: 24px;
+      font-weight: bold;
+    }
+    .details p {
+      margin: 8px 0;
+      font-size: 16px;
+    }
+    .passenger-info {
+      margin-top: 20px;
+      border-top: 1px solid #ddd;
+      padding-top: 15px;
+    }
+    .passenger-info label {
+      display: block;
+      margin-bottom: 5px;
+      font-weight: bold;
+    }
+    .passenger-info input, .passenger-info select {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 15px;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      font-size: 15px;
+    }
+    .confirm-button {
+      background-color: #007bff;
+      color: #fff;
+      border: none;
+      width: 100%;
+      padding: 12px;
+      font-size: 18px;
+      font-weight: bold;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+    .confirm-button:hover {
+      background-color: #0056b3;
+    }
+  </style>
+  <script>
+    function confirmBooking() {
+      const name = document.getElementById('name').value.trim();
+      const age = document.getElementById('age').value.trim();
+      const gender = document.getElementById('gender').value;
+
+      if (!name || !age) {
+        alert("Please enter all details.");
+        return;
+      }
+
+      // Static booking details
+      const travels = "Kamakshi Travels";
+      const seats = "U5";
+      const price = "650";
+      const total = "650";
+
+      // Construct URL with all data encoded
+      const url = `result.html?` +
+        `travels=${encodeURIComponent(travels)}` +
+        `&seats=${encodeURIComponent(seats)}` +
+        `&price=${encodeURIComponent(price)}` +
+        `&total=${encodeURIComponent(total)}` +
+        `&name=${encodeURIComponent(name)}` +
+        `&age=${encodeURIComponent(age)}` +
+        `&gender=${encodeURIComponent(gender)}`;
+
+      // Redirect to result page
+      window.location.href = url;
+    }
+  </script>
+</head>
+<body>
+  <div class="confirm-container">
+    <h1>Confirm Your Booking</h1>
+    <div class="details">
+      <p>Travels: Kamakshi Travels</p>
+      <p>Seats Selected: U5</p>
+      <p>Price per Seat: ₹650</p>
+      <p>Total Price: ₹650</p>
+    </div>
+
+    <div class="passenger-info">
+      <label for="name">Name:</label>
+      <input type="text" id="name" placeholder="Enter name" />
+
+      <label for="age">Age:</label>
+      <input type="number" id="age" placeholder="Enter age" />
+
+      <label for="gender">Gender:</label>
+      <select id="gender">
+        <option value="male">Male</option>
+        <option value="female">Female</option>
+        <option value="other">Other</option>
+      </select>
+    </div>
+
+    <button class="confirm-button" onclick="confirmBooking()">Confirm Booking</button>
+  </div>
+</body>
+</html>

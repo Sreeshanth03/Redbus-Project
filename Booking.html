@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RedBus</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+       body { 
+    font-family: 'Arial', sans-serif; 
+    margin: 0; 
+    padding: 0; 
+    background-color: #f4f7fa; 
+    color: #333; 
+}
+
+.navbar { 
+    background-color: #e60023; 
+    padding: 20px 30px; 
+    color: #fff; 
+    display: flex; 
+    justify-content: space-between; 
+    align-items: center; 
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
+}
+
+.navbar h1 { 
+    margin: 0; 
+    font-size: 26px; 
+    font-weight: 600; 
+}
+
+.filter-section { 
+    padding: 20px; 
+    background-color: #fff; 
+    display: flex; 
+    gap: 20px; 
+    overflow-x: auto; 
+    border-radius: 8px; 
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); 
+}
+
+.filter-section button { 
+    background-color: #f5f5f5; 
+    border: 1px solid #ddd; 
+    padding: 10px 15px; 
+    border-radius: 8px; 
+    cursor: pointer; 
+    white-space: nowrap; 
+    font-size: 14px; 
+    transition: background-color 0.3s ease, transform 0.3s ease; 
+}
+
+.filter-section button:hover { 
+    background-color: #e60023; 
+    color: #fff; 
+    transform: translateY(-2px); 
+}
+
+.bus-list { 
+    margin: 30px auto; 
+    background-color: #fff; 
+    border-radius: 12px; 
+    padding: 20px; 
+    max-width: 800px; 
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1); 
+}
+
+.bus-item { 
+    display: flex; 
+    justify-content: space-between; 
+    padding: 15px 0; 
+    border-bottom: 1px solid #ddd; 
+    align-items: center; 
+    transition: background-color 0.3s ease; 
+}
+
+.bus-item:hover { 
+    background-color: #f9f9f9; 
+}
+
+.bus-item:last-child { 
+    border-bottom: none; 
+}
+
+.bus-details { 
+    display: flex; 
+    flex-direction: column; 
+}
+
+.bus-name { 
+    font-weight: bold; 
+    font-size: 20px; 
+    color: #333; 
+}
+
+.price { 
+    font-weight: bold; 
+    font-size: 18px; 
+    color: #e60023; 
+}
+
+.btn-view { 
+    background-color: #e60023; 
+    color: #fff; 
+    border: none; 
+    padding: 10px 18px; 
+    border-radius: 8px; 
+    cursor: pointer; 
+    font-size: 16px; 
+    transition: background-color 0.3s ease, transform 0.3s ease; 
+}
+
+.btn-view:hover { 
+    background-color: #d4001f; 
+    transform: translateY(-2px); 
+}
+
+@media (max-width: 768px) { 
+    .filter-section { 
+        flex-direction: column; 
+        gap: 10px; 
+    }
+}
+
+    </style>
+</head>
+<body>
+    <div class="navbar">
+        <h1>RedBus</h1>
+        <div>
+            <i class="fas fa-user-circle fa-2x"></i>
+        </div>
+    </div>
+
+    <div class="filter-section">
+        <button>Primo</button>
+        <button>AC</button>
+        <button>Sleeper</button>
+        <button>Seater</button>
+        <button>Non-AC</button>
+        <button>Live Tracking</button>
+        <button>High Rated</button>
+    </div>
+
+    <div class="bus-list">
+        <div class="bus-item">
+            <div class="bus-details">
+                <span class="bus-name">TVK Travels - Bharat Benz A/C Sleeper</span>
+                <span>21:45 - 06:51 | 9h 6m | 8 Seats</span>
+            </div>
+            <div>
+                <span class="price">₹650</span>
+                <button class="btn-view" onclick="find()">View Seats</button>
+            </div>
+        </div>
+        <div class="bus-item">
+            <div class="bus-details">
+                <span class="bus-name">VRL Travels - Volvo AC Sleeper</span>
+                <span>22:00 - 07:00 | 9h | 12 Seats</span>
+            </div>
+            <div>
+                <span class="price">₹650</span>
+                <button class="btn-view" onclick="find()">View Seats</button>
+            </div>
+        </div>
+        <div class="bus-item">
+            <div class="bus-details">
+                <span class="bus-name">SRS Travels - Scania Multi-Axle</span>
+                <span>20:30 - 05:30 | 9h | 10 Seats</span>
+            </div>
+            <div>
+                <span class="price">₹650</span>
+                <button class="btn-view" onclick="find()">View Seats</button>
+            </div>
+        </div>
+        <div class="bus-item">
+            <div class="bus-details">
+                <span class="bus-name">Orange Travels - Sleeper AC</span>
+                <span>23:00 - 07:00 | 8h | 15 Seats</span>
+            </div>
+            <div>
+                <span class="price">₹1,499</span>
+                <button class="btn-view" onclick="find()">View Seats</button>
+
+<script>
+      function find(){
+            window.location.href ="./Seats.html"
+      }
+</script>
+
+              
+            </div>
+        </div>
+    </div>
+</body>
+</html>
